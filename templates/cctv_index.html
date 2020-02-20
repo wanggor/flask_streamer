@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Page title -->
+    <title>Spec - Responsive Bootstrap Admin</title>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!--<link rel="shortcut icon" type="image/ico" href="favicon.ico" />-->
+
+    <!-- dependencies styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='dependencies/fontawesome/css/font-awesome.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dependencies/metisMenu/dist/metisMenu.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dependencies/animate.css/animate.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dependencies/bootstrap/dist/css/bootstrap.css') }}"/>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='dependencies/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css') }}"/>
+
+
+    <!-- dependencies styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/pe-icon-7-stroke/css/helper.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+
+
+</head>
+<body class="fixed-navbar sidebar-scroll">
+
+<!-- Header -->
+<div id="header">
+    <div id="logo" class="light-version">
+        <span style="font-weight:bold;">
+            CCTV 
+        </span>
+    </div>
+</div>
+
+
+<div id="wrapper">
+
+<div class="content">
+        <div class="row">
+            <div class="text-center col-md-6">
+                <div class="specpanel ">
+                    <div style = "height : 550px;" class="panel-body file-body">
+                        <canvas id="BubbleChart" height="150"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center col-md-6">
+                <div class="specpanel ">
+                    <div class="panel-body file-body" style ="padding: 10px">
+
+                        <div>
+                            <canvas id="lineChart" height="95"></canvas>
+                        </div>
+
+                        <div class="text-center col-md-6">
+
+                            <div class="specpanel">
+                                <div class="panel-body file-body" style = "height : 240px">
+                                    <div>
+                                        <canvas id="barChart" height="150"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="text-center col-md-6">
+
+                            <div class="specpanel">
+                                <div class="panel-body file-body" style = "height : 240px">
+                                    <div>
+                                        <canvas id="doughnutChart" height="150"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="border-right border-left ">
+                    <section id="map">
+                        <div id="map1" style="height: 200px"></div>
+                    </section>
+                </div>
+
+                <div class="specpanel hgreen">
+                    <div class="panel-body">
+
+                <div class="m-b-md">
+                    <h4>
+                        Filters
+                    </h4>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Persimpangan :</label>
+                    <div class="input-group" style="width : 100%">
+                        <select class="form-control" name="account">
+                            <option selected>All</option>
+                            <option>Persimpangan 1</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Sort by :</label>
+                    <div class="input-group" style="width : 100%">
+                        <select class="form-control" name="account">
+                            <option selected>None</option>
+                            <option >Volume</option>
+                            <option>Speed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Status:
+                    </label>
+                    <div class="input-group" style = "margin-left : 20px">
+                        <div class="checkbox checkbox-success">
+                            <input checked id="checkbox1" type="checkbox">
+                            <label for="checkbox1" class = "text-success">
+                                Save
+                            </label>
+                        </div>
+                        <div class="checkbox checkbox-warning">
+                            <input id="checkbox2" type="checkbox">
+                            <label for="checkbox2" class = "text-warning">
+                                Warning
+                            </label>
+                        </div>
+                        <div class="checkbox checkbox-danger">
+                            <input id="checkbox3" type="checkbox">
+                            <label for="checkbox3" class = "text-danger">
+                                Danger
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-success btn-block">Apply</button>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    
+                        
+                        {% for cctv in cctv_list %}
+                        <div class="col-md-6">
+                            <div class="specpanel ">
+                                <div class="panel-body file-body" style = "height : 350px; padding : 5px">
+                                    <img src="{{ url_for('video_feed', feed_id=cctv.id) }}">
+                                </div>
+                                <div class="panel-footer ">
+                                    <a href="#footer-cctv-{{ cctv.id }}">{{ cctv.name }}</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+
+                   
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+    <!-- Footer-->
+    <footer class="footer">
+        Company 2015-2020
+    </footer>
+
+</div>
+
+<!-- dependencies scripts -->
+<script src="{{ url_for('static', filename='dependencies/jquery/dist/jquery.js') }}"></script>
+<script src="{{ url_for('static', filename='dependencies/jquery-ui/jquery-ui.js') }}"></script>
+<script src="{{ url_for('static', filename='dependencies/slimScroll/jquery.slimscroll.js') }}"></script>
+<script src="{{ url_for('static', filename='dependencies/bootstrap/dist/js/bootstrap.js') }}"></script>
+<script src="{{ url_for('static', filename='dependencies/metisMenu/dist/metisMenu.js') }}"></script>
+<script src="{{ url_for('static', filename='dependencies/iCheck/icheck.js') }}"></script>
+<script src="{{ url_for('static', filename='charts/js/plugins/chartJs/Chart.js') }}"></script>
+<script src="{{ url_for('static', filename='charts/js/plugins/peity/jquery.peity.js') }}"></script>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" />
+
+<!-- Flot Charts Initializing Script -->
+<script src="{{ url_for('static', filename='charts/js/settings/peity-settings.js') }}"></script>
+<!-- spec scripts -->
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9A5lLa7ZfOpmFN7Ic13BvQ-vUrKkUvhU"></script>
+
+
+<script>
+
+    // When the window has finished loading google map
+    google.maps.event.addDomListener(window, 'load', init);
+
+    function init() {
+        // Options for Google map
+        // More info see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+        var mapOptions1 = {
+            zoom: 13,
+            center: new google.maps.LatLng(-8.670193, 115.233819),
+            streetViewControl: false,
+            // Style for Google Maps
+            // styles: [{"featureType":"landscape","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"poi","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"administrative.province","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#ffff00"},{"lightness":-25},{"saturation":-97}]}]
+        };
+
+        // Get all html elements for map
+        var mapElement1 = document.getElementById('map1');
+
+        var iconBase =
+            'https://developers.google.com/maps/documentation/javascript/examples/full/images/';
+
+        var icons = {
+          parking: {
+            icon: iconBase + 'parking_lot_maps.png'
+          },
+          library: {
+            icon: iconBase + 'library_maps.png'
+          },
+          info: {
+            icon: iconBase + 'info-i_maps.png'
+          }
+        };
+
+
+        var features = [
+            {
+            position: new google.maps.LatLng(-8.670193, 115.233819),
+            type: 'info'
+          },
+        ]
+
+
+        // Create the Google Map using elements
+        var map1 = new google.maps.Map(mapElement1, mapOptions1);
+
+        var marker = new google.maps.Marker({
+            position: features[0].position,
+            icon: icons[features[0].type].icon,
+            map: map1
+
+        });
+    }
+
+</script>
+
+<script>
+"use strict";
+
+/*Function to update the bar chart*/
+function updateBarGraph(chart, data) {
+  chart.data = data;
+  chart.update(0);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+$(function () {
+
+
+    var lineOptions = {
+        responsive: true
+    };
+    var barOptions = {
+        responsive: true
+    };
+    var doughnutOptions = {
+        responsive: true
+    };
+    var bubleOptions = {
+        responsive: true,
+         scales: {
+            xAxes: [{display: false,
+                    ticks: {
+                            beginAtZero: true,
+                            max: 100
+                            }}],
+            yAxes: [{display: false,
+                    ticks: {
+                            beginAtZero: true,
+                            max: 100
+                            }}],
+        }
+    };
+
+    //Let's updatedDataSet[] be the array to hold the upadted data set with every update call
+    var updatedDataSet;
+
+    var temp_line  = [];
+    var temp_bar  = [];
+    var temp_pie = [];
+    var temp_scatter = [];
+    $.getJSON('/_getData',
+        function(data){
+            //console.log(data);
+            temp_line = data.data_line_chart;
+            temp_bar = data.data_bar_chart;
+            temp_pie = data.data_pie_chart;
+            temp_scatter = data.data_scatter_chart;
+        });
+
+    /*Creating the bar chart*/
+    var ctx = document.getElementById("lineChart");
+    var lineChart = new Chart(ctx, {type: 'line',data: temp_line,options: lineOptions});
+
+    var ctx2        = document.getElementById("barChart").getContext("2d");
+    var barChart   = new Chart(ctx2, {type: 'bar', data: temp_bar, options:barOptions});
+
+    var ctx4            =   document.getElementById("doughnutChart").getContext("2d");
+    var doughnutChart   =   new Chart(ctx4, {type: 'doughnut', data: temp_pie, options:doughnutOptions});
+
+    var ctx7 = document.getElementById("BubbleChart");
+    var BubbleChart   =new Chart(ctx7, {
+        type: 'bubble',
+        data:temp_scatter,
+        options : bubleOptions
+    });
+
+
+    var data_scatter = {
+        labels: ["Color 1", "Color 2", "Color 3", "Color 4"],
+        datasets: [
+                {
+                label: 'First Dataset',
+                data: [
+                    {
+                        x: 20,
+                        y: 30,
+                        r: 15
+                    },
+                    {
+                        x: 40,
+                        y: 10,
+                        r: 10
+                    }
+                ],
+                backgroundColor:"#FF6384",
+                hoverBackgroundColor: "#FF6384",
+            },
+            {
+                label: 'Second Dataset',
+                data: [
+                    {
+                        x: 10,
+                        y: 20,
+                        r: 10
+                    },
+                    {
+                        x: 30,
+                        y: 10,
+                        r: 10
+                    }
+                ],
+                backgroundColor:"#333",
+                hoverBackgroundColor: "#333",
+            },
+            {
+                label: 'Third Dataset',
+                data: [
+                    {
+                        x: 28,
+                        y: 10,
+                        r: 15
+                    },
+                    {
+                        x: 25,
+                        y: 5,
+                        r: 10
+                    }
+                ],
+                backgroundColor:"#1ab394",
+                hoverBackgroundColor: "#1ab394",
+            }
+        ]
+    }
+
+    /*Updating the bar chart with updated data in every second. */
+    setInterval(function() {
+        $.getJSON('/_getData',
+        function(data){
+            temp_line = data.data_line_chart;
+            temp_bar = data.data_bar_chart;
+            temp_pie = data.data_pie_chart;
+            temp_scatter = data.data_scatter_chart;
+        });
+
+        //console.log(temp_scatter);
+        //console.log(data_scatter);
+
+        updateBarGraph(lineChart,  temp_line);
+        updateBarGraph(barChart,  temp_bar);
+        updateBarGraph(doughnutChart,  temp_pie);
+        updateBarGraph(BubbleChart,  temp_scatter[0]);
+    }, 1000);
+});
+
+});
+
+
+</script>
+
+
+</body>
+</html>

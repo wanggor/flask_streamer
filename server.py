@@ -43,7 +43,6 @@ mH = args["montageH"]
 while True:
 	
 	(rpiName, frame) = imageHub.recv_image()
-	print("running")
 	imageHub.send_reply(b'OK')
 	if rpiName not in lastActive.keys():
 		print("[INFO] receiving data from {}...".format(rpiName))
